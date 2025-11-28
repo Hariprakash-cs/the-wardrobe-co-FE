@@ -1,6 +1,6 @@
 export const config = {
-  api: "http://localhost:5001",
-  // api:"https://pixel-shops.herokuapp.com"
+  // api: "http://localhost:5001",
+  api: "https://the-wardrobe-co-be.contentstackapps.com/",
   // api:"https://pixel-ecommerce-backend.vercel.app"
 
   // Contentstack CMS Configuration
