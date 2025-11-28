@@ -1,17 +1,11 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../actions/userActions";
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import GradingIcon from '@mui/icons-material/Grading';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-import ContactPageIcon from '@mui/icons-material/ContactPage';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import Diversity2Icon from '@mui/icons-material/Diversity2';
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import Diversity2Icon from "@mui/icons-material/Diversity2";
 import Filter1 from "./Filter1";
+import "./Navbar.css";
+
 export default function Navbar() {
   const cartreducer = useSelector((state) => state.cartReducer);
 
@@ -19,16 +13,20 @@ export default function Navbar() {
 
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-  const dispatch = useDispatch()
+  const [scrolled, setScrolled] = useState(false);
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  // Detect scroll for sticky navbar effect
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 20;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [scrolled]);
 
   return (
     // <div>
@@ -36,8 +34,7 @@ export default function Navbar() {
     //     <a className="navbar-brand" href="/">
     //       PIXEL SHOPS
     //     </a>
-       
-        
+
     //     <button
     //       className="navbar-toggler"
     //       type="button"
@@ -50,15 +47,13 @@ export default function Navbar() {
     //       <span className="navbar-toggler-icon"><i class="fas fa-bars" style={{color:'white'}}></i></span>
     //     </button>
 
-
-
     //     <div className="collapse navbar-collapse" id="navbarNav">
     //       <div className="navbar-nav ">
     //       {/* <Filter1/> */}
     //         {currentUser ? (
     //            <li className="card profile-out">
 
-    //            <Button 
+    //            <Button
     //              id="basic-button"
     //              aria-controls={open ? 'basic-menu' : undefined}
     //              aria-haspopup="true"
@@ -83,7 +78,7 @@ export default function Navbar() {
     //              <MenuItem onClick={()=>{dispatch(logoutUser())}}><ExitToAppIcon/>Logout</MenuItem>
     //            </Menu>
     //          </li>
-             
+
     //         ) : (
     //           <li className="nav-item ">
     //             <a className="nav-link" href="/login">
@@ -101,60 +96,40 @@ export default function Navbar() {
     //     </div>
     //   </nav>
     // </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-  <a className="navbar-brand" href="/"><Diversity2Icon className="main-icon"/>PIXEL SHOPS</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"><i class="fas fa-bars" style={{color:'white'}}></i></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li className="nav-item  ">  <Filter1/> </li>
-      {currentUser ? (
+    <nav className={`modern-navbar ${scrolled ? "scrolled" : ""}`}>
+      <div className="navbar-container">
+        <a className="brand-logo" href="/">
+          <Diversity2Icon className="brand-icon" />
+          <span className="brand-text">The Wardrobe Co</span>
+        </a>
 
-               <li className="card profile-out">
+        <div className="navbar-content">
+          <div className="nav-search-wrapper">
+            <Filter1 />
+          </div>
 
-               <Button 
-                 id="basic-button"
-                 aria-controls={open ? 'basic-menu' : undefined}
-                 aria-haspopup="true"
-                 aria-expanded={open ? 'true' : undefined}
-                 onClick={handleClick}
-               >
-                 <AccountCircleIcon className="profile-btn"/>{currentUser.name}
-                 {/* <i style={{color:'white'}} className="fa fa-user" aria-hidden="true"></i>{currentUser.name} */}
-               </Button>
-               <Menu
-                 id="basic-menu"
-                 anchorEl={anchorEl}
-                 open={open}
-                 onClose={handleClose}
-                 MenuListProps={{
-                   'aria-labelledby': 'basic-button',
-                 }}
-               >
-                 <MenuItem  onClick={handleClose}><a href="/profile"><ContactPageIcon className="margin-less-10"/>Profile</a></MenuItem>
-                 <MenuItem onClick={handleClose}><a href="/admin/userslist"><AdminPanelSettingsIcon className="margin-less-10"/>Admin Pannel</a></MenuItem>
-                 <MenuItem onClick={handleClose}><a href="/orders"><GradingIcon className="margin-less-10"/>Orders</a></MenuItem>
-                 <MenuItem onClick={()=>{dispatch(logoutUser())}}><ExitToAppIcon/>Logout</MenuItem>
-               </Menu>
-             </li>
-             
-            ) : (
-              <li className="nav-item ">
-                <a className="nav-link" href="/login">
-                  Login
-                </a>
-              </li>
-            )}
-            <li className="nav-item  ">
-              <a className="nav-link" href="/cart">
-                <AddShoppingCartIcon/> {cartItems.length}
+          <div className="nav-actions">
+            {currentUser ? (
+              <a href="/profile" className="profile-link">
+                <AccountCircleIcon className="profile-icon" />
+                <span className="user-name">{currentUser.name}</span>
               </a>
-            </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-  )
+            ) : (
+              <a href="/login" className="login-button">
+                <AccountCircleIcon />
+                <span>Login</span>
+              </a>
+            )}
+
+            <a href="/cart" className="cart-button">
+              <AddShoppingCartIcon className="cart-icon" />
+              {cartItems.length > 0 && (
+                <span className="cart-badge">{cartItems.length}</span>
+              )}
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
 }

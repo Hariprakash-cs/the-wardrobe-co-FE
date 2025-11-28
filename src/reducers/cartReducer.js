@@ -1,44 +1,44 @@
-export const cartReducer=(state={cartItems : []} , action)=>{
+export const cartReducer = (state = { cartItems: [] }, action) => {
+  switch (action.type) {
+    case "ADD_TO_CART":
+      // Use cartItemId (which includes size) for comparison instead of just _id
+      const alreadyexist = state.cartItems.find(
+        (item) => item.cartItemId === action.payload.cartItemId
+      );
 
-    switch(action.type)
-    {
-        case 'ADD_TO_CART' : 
-       
-        const alreadyexist = state.cartItems.find(item => item._id == action.payload._id)
+      if (alreadyexist) {
+        // Update existing item (same product and size)
+        return {
+          ...state,
+          cartItems: state.cartItems.map((item) =>
+            item.cartItemId === action.payload.cartItemId
+              ? action.payload
+              : item
+          ),
+        };
+      } else {
+        // Add new item (different product or different size)
+        return {
+          ...state,
+          cartItems: [...state.cartItems, action.payload],
+        };
+      }
 
-        if(alreadyexist)
-        {
+    case "DELETE_FROM_CART":
+      return {
+        ...state,
+        cartItems: state.cartItems.filter((item) => {
+          return item.cartItemId !== action.payload.cartItemId;
+        }),
+      };
 
-            return {
-                ...state ,
-                cartItems : state.cartItems.map((item) => item._id == action.payload._id ? action.payload : item)
-            }
+    case "CLEAR_CART":
+      return {
+        ...state,
+        cartItems: [],
+      };
 
-        }
-        else{
-
-            return {
-
-                ...state ,
-                cartItems : [...state.cartItems , action.payload]
- 
-         }
-
-        }
-
-
-        case 'DELETE_FROM_CART' : return{
-
-              ...state , 
-              cartItems : state.cartItems.filter(item=> {return item._id !==action.payload._id})
-
-        }
-
-    
-        
-
-        default : return state
-    }
-
-
-}
+    default:
+      return state;
+  }
+};

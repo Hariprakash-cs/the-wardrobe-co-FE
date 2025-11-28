@@ -1,0 +1,99 @@
+{
+  "product_entry_example": {
+    "title": "Wireless Bluetooth Headphones",
+    "description": "Premium quality wireless headphones with active noise cancellation, 40-hour battery life, and superior sound quality. Perfect for music lovers and professionals.",
+    "price": 2999,
+    "image": {
+      "url": "https://images.contentstack.io/v3/assets/.../headphones.jpg",
+      "title": "Wireless Headphones",
+      "filename": "headphones.jpg"
+    },
+    "category": "Electronics",
+    "countInStock": 50,
+    "rating": 4.5,
+    "reviews": []
+  },
+
+  "alternative_field_names": {
+    "note": "The transformation function supports multiple field name variations",
+    "product_name_options": ["title", "name", "product_name"],
+    "stock_options": ["countInStock", "count_in_stock", "stock", "quantity"],
+    "image_options": ["image", "product_image", "thumbnail"]
+  },
+
+  "minimal_product_entry": {
+    "title": "Sample Product",
+    "description": "This is a sample product description",
+    "price": 999,
+    "image": {
+      "url": "https://example.com/image.jpg"
+    },
+    "category": "General",
+    "countInStock": 10
+  },
+
+  "complete_product_entry_with_all_fields": {
+    "title": "Premium Laptop Backpack",
+    "description": "Water-resistant laptop backpack with multiple compartments, USB charging port, and anti-theft design. Fits laptops up to 15.6 inches.",
+    "price": 1499,
+    "image": {
+      "uid": "blt123456",
+      "url": "https://images.contentstack.io/v3/assets/.../backpack.jpg",
+      "title": "Laptop Backpack",
+      "filename": "laptop-backpack.jpg",
+      "content_type": "image/jpeg"
+    },
+    "category": "Accessories",
+    "countInStock": 100,
+    "rating": 4.8,
+    "reviews": [],
+    "brand": "TechPack",
+    "tags": ["backpack", "laptop", "travel", "waterproof"],
+    "featured": true,
+    "sale_price": 1299,
+    "specifications": {
+      "material": "Waterproof Polyester",
+      "dimensions": "18 x 12 x 7 inches",
+      "weight": "1.5 lbs",
+      "color": "Black"
+    }
+  },
+
+  "contentstack_structure": {
+    "note": "This is how Contentstack returns the entry",
+    "entry": {
+      "uid": "blt9876543210",
+      "title": "Product Name",
+      "description": "Product description here",
+      "price": 1999,
+      "image": {
+        "url": "https://images.contentstack.io/v3/assets/.../image.jpg"
+      },
+      "category": "Category Name",
+      "countInStock": 25,
+      "rating": 4.2,
+      "created_at": "2024-01-15T10:30:00.000Z",
+      "updated_at": "2024-01-20T14:45:00.000Z",
+      "created_by": "bltuser123",
+      "updated_by": "bltuser123",
+      "locale": "en-us",
+      "ACL": {},
+      "_version": 1
+    }
+  },
+
+  "transformed_for_app": {
+    "note": "After transformation, the product object looks like this",
+    "_id": "blt9876543210",
+    "uid": "blt9876543210",
+    "name": "Product Name",
+    "description": "Product description here",
+    "price": 1999,
+    "image": "https://images.contentstack.io/v3/assets/.../image.jpg",
+    "category": "Category Name",
+    "countInStock": 25,
+    "rating": 4.2,
+    "reviews": [],
+    "cmsEntry": true
+  }
+}
