@@ -2,13 +2,13 @@ fileignoreconfig:
   - filename: COMPLETE_FLOW_GUIDE.md
     checksum: 8e6ee6e86f9053ba7e760856b8584e57c04546994f2d27c22561189745da1857
   - filename: src/config.js
-    checksum: 8da4756455f838c9c5f4ee6d4d2b7c48031fb5c8aa4f0951dca6a3e16c1ad1ce
+    checksum: be5fc76a4f9e27e86ec13f8bf03028ff6420f271d1ed7a65c95b1eb4cdf440d5
   - filename: FINAL_CHANGES_SUMMARY.md
     checksum: 7415c975ded3c4d468f8c4d9889477a615b8e10269fc9cadeae52504d72542fa
   - filename: PRODUCT_DETAILS_FLOW.md
     checksum: 13b180980071b2ff90e17ff37693853d434e8f781b75d4b35a0fb1b2afaeb15c
   - filename: src/components/Checkout.js
-    checksum: 54fe080e88154b4798b5fdb1a6231d71d158abfa3258e20d0458fd4330225f44
+    checksum: 3b60cace2e245817a37727350f893efc1408841bfa886a5b233a6fcf444cbb16
   - filename: src/components/ImageWithHotspots.js
     checksum: cad44539c5d6d159c57b3a1fb13fa87c60a49653b91a19b57866a62d456ad631
   - filename: src/screens/Cartscreen.js

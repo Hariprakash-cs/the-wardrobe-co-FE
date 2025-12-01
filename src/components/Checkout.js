@@ -48,8 +48,7 @@ export default function Checkout({ amount }) {
         amount={amount * 100}
         shippingAddress
         currency="INR"
-        stripeKey="pk_test_51LeHpZIjTW834vha0aZHhDzid91olOIUSMnWwW93TnBc4xv6h6cGBskkobpPOwmC2ZZDEz5uJpaRuwuSMzHxrEXa00L63nODYj"
-        // stripeKey='pk_test_51IYnC0SIR2AbPxU0TMStZwFUoaDZle9yXVygpVIzg36LdpO8aSG8B9j2C0AikiQw2YyCI8n4faFYQI5uG3Nk5EGQ00lCfjXYvZ'
+        stripeKey={process.env.REACT_APP_STRIPE_PUBLIC_KEY}
       >
         <button className="modern-checkout-btn" onClick={validate}>
           <PaymentIcon className="checkout-icon" />

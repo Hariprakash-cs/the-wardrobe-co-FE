@@ -1,16 +1,14 @@
 export const config = {
-  // api: "http://localhost:5001",
-  api: "https://the-wardrobe-co-be.contentstackapps.com/",
-  // api:"https://pixel-ecommerce-backend.vercel.app"
+  api: process.env.REACT_APP_API_URL || "http://localhost:5001",
 
   // Contentstack CMS Configuration
   contentstack: {
-    apiKey: "blt3435e7e7f3e56dcc", // Add your Contentstack API Key here
-    accessToken: "cseab624052afe37759c0de021", // Add your Contentstack Delivery Token here
-    environment: "main", // or your environment name
-    spaceUid: "amb10a029ae0e10001", // Asset Management space UID
-    organizationUid: "blt9a324a7f77db1ef9", // Organization UID
-    assetAccessToken: "bltfa7b223de9dce42e", // Asset Management access token
-    workspace: "main", // Workspace name
+    apiKey: process.env.REACT_APP_CONTENTSTACK_API_KEY,
+    accessToken: process.env.REACT_APP_CONTENTSTACK_ACCESS_TOKEN,
+    environment: process.env.REACT_APP_CONTENTSTACK_ENVIRONMENT || "main",
+    spaceUid: "amb10a029ae0e10001",
+    organizationUid: "blt9a324a7f77db1ef9",
+    assetAccessToken: "bltfa7b223de9dce42e",
+    workspace: "main",
   },
 };
