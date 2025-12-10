@@ -70,7 +70,11 @@ export default function Review({ product }) {
 
         {!isLoggedIn && (
           <div className="alert alert-warning" role="alert">
-            Please <a href="/login" className="alert-link">login</a> to write a review
+            Please{" "}
+            <a href="/login" className="alert-link">
+              login
+            </a>{" "}
+            to write a review
           </div>
         )}
 
@@ -88,18 +92,23 @@ export default function Review({ product }) {
         <input
           type="text"
           className="form-control mt-2"
-          placeholder={isLoggedIn ? "Write your review here..." : "Login to write a review"}
+          placeholder={
+            isLoggedIn ? "Write your review here..." : "Login to write a review"
+          }
           value={comment}
           onChange={(e) => {
             setcomment(e.target.value);
           }}
           disabled={!isLoggedIn}
         />
-        <button 
-          className="btn mt-3" 
+        <button
+          className="btn mt-3"
           onClick={sendreview}
           disabled={!isLoggedIn}
-          style={{ opacity: !isLoggedIn ? 0.6 : 1, cursor: !isLoggedIn ? 'not-allowed' : 'pointer' }}
+          style={{
+            opacity: !isLoggedIn ? 0.6 : 1,
+            cursor: !isLoggedIn ? "not-allowed" : "pointer",
+          }}
         >
           Submit Review
         </button>

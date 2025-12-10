@@ -15,13 +15,18 @@ export default function Checkout({ amount }) {
 
   const { loading, success, error } = orderstate;
 
+  // Get Stripe key from environment
+  const stripeKey = process.env.REACT_APP_STRIPE_PUBLIC_KEY;
+
+
+
   function tokenHandler(token) {
     // Double-check authentication before processing payment
     if (!localStorage.getItem("currentUser")) {
       window.location.href = "/login";
       return;
     }
-    console.log(token);
+
     dispatch(placeOrder(token, amount));
   }
 
@@ -52,18 +57,25 @@ export default function Checkout({ amount }) {
       )}
       {error && <Error error="Something Went wrong" />}
 
-      <StripeCheckout
-        token={tokenHandler}
-        amount={amount * 100}
-        shippingAddress
-        currency="INR"
-        stripeKey={process.env.REACT_APP_STRIPE_PUBLIC_KEY}
-      >
-        <button className="modern-checkout-btn" onClick={validate}>
-          <PaymentIcon className="checkout-icon" />
-          <span>Proceed to Payment</span>
-        </button>
-      </StripeCheckout>
+      {!stripeKey ? (
+        <div className="alert alert-danger">
+          <p>Payment system configuration error. Please contact support.</p>
+          <small>Stripe key is not configured. Check your .env file.</small>
+        </div>
+      ) : (
+        <StripeCheckout
+          token={tokenHandler}
+          amount={amount * 100}
+          shippingAddress
+          currency="INR"
+          stripeKey={stripeKey}
+        >
+          <button className="modern-checkout-btn" onClick={validate}>
+            <PaymentIcon className="checkout-icon" />
+            <span>Proceed to Payment</span>
+          </button>
+        </StripeCheckout>
+      )}
     </div>
   );
 }

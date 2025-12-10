@@ -1,42 +1,4 @@
 fileignoreconfig:
-  - filename: COMPLETE_FLOW_GUIDE.md
-    checksum: 8e6ee6e86f9053ba7e760856b8584e57c04546994f2d27c22561189745da1857
-  - filename: src/config.js
-    checksum: be5fc76a4f9e27e86ec13f8bf03028ff6420f271d1ed7a65c95b1eb4cdf440d5
-  - filename: FINAL_CHANGES_SUMMARY.md
-    checksum: 7415c975ded3c4d468f8c4d9889477a615b8e10269fc9cadeae52504d72542fa
-  - filename: PRODUCT_DETAILS_FLOW.md
-    checksum: 13b180980071b2ff90e17ff37693853d434e8f781b75d4b35a0fb1b2afaeb15c
-  - filename: src/components/Checkout.js
-    checksum: 3b60cace2e245817a37727350f893efc1408841bfa886a5b233a6fcf444cbb16
-  - filename: src/components/ImageWithHotspots.js
-    checksum: cad44539c5d6d159c57b3a1fb13fa87c60a49653b91a19b57866a62d456ad631
-  - filename: src/screens/Cartscreen.js
-    checksum: cfd3e6de98760d08d007003bf07de7667a88c5bd766548d5dace4c30da55163b
-  - filename: INTEGRATION_SUMMARY.md
-    checksum: 4da734630d485f8fc99fb1b65d8aa30e99051c4afdd89ac0e7882f0a4654148a
-  - filename: CONTENTSTACK_SETUP.md
-    checksum: 4027886f5a3298453e1d6a292ec79f2ece9d0311c68452170b022fad5653158e
-  - filename: src/components/Filter.js
-    checksum: 21c019fe4e1faaa696ec922591b16d89e167414a7fe37405f3cca7f9b2bf9856
-  - filename: src/screens/Loginscreen.js
-    checksum: 2b2c351bbdcbcc1bc0b6adde8650975848f4266b6dba23c9ed0c6cfc55430105
-  - filename: src/components/Filter1.js
-    checksum: 021f8b6e6c3002bc35f8ce0cf4c4e3c8a709980d8fdaaaf1bd3dafc9674787dd
-  - filename: README_CMS_INTEGRATION.md
-    checksum: c61656836d1074c5b9b446d149cd61261ae9be6d505f20222b75feb384b899f3
-  - filename: CMS_INTEGRATION_CHECKLIST.md
-    checksum: cdfaab33169606e2856e3f1f121eb09bafcfba011d3de8065ac38d3f9c95a610
-  - filename: src/screens/Homescreen.js
-    checksum: 260064f5182007dd3f99e8b9d627fa707bda2a3104c365dd197e3407e7ec49f7
-  - filename: src/actions/productActions.js
-    checksum: 8ca98f4fcf61469701a2ea684a7665090a3ec46715da0c7a28cbc5b4c0924d45
-  - filename: src/components/Review.js
-    checksum: e0e67df27bf5a14b49b62352d7f78e9f4c3a57d533e06de1d1efa86f44ce6658
-  - filename: src/screens/Registerscreen.js
-    checksum: d70bd1941c35fbb4553c64c36978af37ae2c47fdd9536610f8f793b0e3bb10e0
-  - filename: src/screens/Profilescreen.js
-    checksum: 56401fe062c16420f30ea2161448eb1a505cc5f5c1fd4e183417b9e94971ce0a
-  - filename: src/services/contentstackAPI.js
-    checksum: 0dcab71789cb0d327d251ac513b4e5691490bf0896cd4809c96b169f05841cef
+- filename: src/components/Checkout.js
+  checksum: de2dc9effe3bc4555f45ccc44dec58275dba4c512dc3e5ded444ce2ef0e8460b
 version: "1.0"
