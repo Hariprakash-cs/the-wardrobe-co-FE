@@ -46,6 +46,8 @@ export default function Review({ product }) {
       );
     }
   }
+  const isLoggedIn = localStorage.getItem("currentUser");
+
   return (
     <>
       <div className="ml-2 ">
@@ -66,6 +68,12 @@ export default function Review({ product }) {
           </div>
         )}
 
+        {!isLoggedIn && (
+          <div className="alert alert-warning" role="alert">
+            Please <a href="/login" className="alert-link">login</a> to write a review
+          </div>
+        )}
+
         <Rating
           style={{ color: "orange" }}
           initialRating={rating}
@@ -74,18 +82,25 @@ export default function Review({ product }) {
           onChange={(e) => {
             setrating(e);
           }}
+          disabled={!isLoggedIn}
         />
 
         <input
           type="text"
           className="form-control mt-2"
-          placeholder="Write your review here..."
+          placeholder={isLoggedIn ? "Write your review here..." : "Login to write a review"}
           value={comment}
           onChange={(e) => {
             setcomment(e.target.value);
           }}
+          disabled={!isLoggedIn}
         />
-        <button className="btn mt-3" onClick={sendreview}>
+        <button 
+          className="btn mt-3" 
+          onClick={sendreview}
+          disabled={!isLoggedIn}
+          style={{ opacity: !isLoggedIn ? 0.6 : 1, cursor: !isLoggedIn ? 'not-allowed' : 'pointer' }}
+        >
           Submit Review
         </button>
 

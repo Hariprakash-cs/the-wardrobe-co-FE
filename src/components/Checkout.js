@@ -16,14 +16,23 @@ export default function Checkout({ amount }) {
   const { loading, success, error } = orderstate;
 
   function tokenHandler(token) {
+    // Double-check authentication before processing payment
+    if (!localStorage.getItem("currentUser")) {
+      window.location.href = "/login";
+      return;
+    }
     console.log(token);
     dispatch(placeOrder(token, amount));
   }
 
-  function validate() {
+  function validate(e) {
+    // Prevent default behavior if user is not logged in
     if (!localStorage.getItem("currentUser")) {
+      e.preventDefault();
       window.location.href = "/login";
+      return false;
     }
+    return true;
   }
 
   useEffect(() => {
