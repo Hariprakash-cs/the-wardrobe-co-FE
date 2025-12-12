@@ -5,7 +5,7 @@ import { placeOrder } from "../actions/orderActions";
 import { clearCart } from "../actions/cartActions";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
-import Success from "../components/Success";
+import Swal from "sweetalert2";
 import PaymentIcon from "@mui/icons-material/Payment";
 import "./Checkout.css";
 
@@ -17,8 +17,6 @@ export default function Checkout({ amount }) {
 
   // Get Stripe key from environment
   const stripeKey = process.env.REACT_APP_STRIPE_PUBLIC_KEY;
-
-
 
   function tokenHandler(token) {
     // Double-check authentication before processing payment
@@ -43,18 +41,22 @@ export default function Checkout({ amount }) {
   useEffect(() => {
     if (success) {
       dispatch(clearCart());
-      setTimeout(() => {
+      Swal.fire({
+        icon: "success",
+        title: "Order Placed Successfully!",
+        text: "Thank you for your purchase. Your order has been confirmed.",
+        confirmButtonText: "Continue Shopping",
+        confirmButtonColor: "#28a745",
+        allowOutsideClick: false,
+      }).then((result) => {
         window.location.href = "/";
-      }, 2000);
+      });
     }
   }, [success, dispatch]);
 
   return (
     <div className="checkout-container">
       {loading && <Loader />}
-      {success && (
-        <Success success="Your Order Placed Successfully! Redirecting to home..." />
-      )}
       {error && <Error error="Something Went wrong" />}
 
       {!stripeKey ? (

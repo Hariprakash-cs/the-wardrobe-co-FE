@@ -2,6 +2,7 @@
 // Documentation: https://www.contentstack.com/docs/developers/apis/content-delivery-api/
 
 import { config } from "../config";
+import assetMapping from "../data/assetMapping.json";
 
 const CONTENTSTACK_CONFIG = {
   baseURL: "https://cdn.contentstack.io/v3",
@@ -220,31 +221,6 @@ export const contentstackAPI = {
 // ============================================
 
 /**
- * Convert Contentstack CDN image URL to Asset Management API URL
- * From: https://images.contentstack.io/v3/assets/{stack_uid}/{asset_uid}/{hash}/{filename}?environment={env_id}
- * To: https://am-api.contentstack.com/spaces/{space_uid}/assets/{asset_uid}/{hash}/{filename}?locale=en-us&organization_uid={org_uid}
- */
-const convertImageUrl = (url) => {
-  if (!url || typeof url !== "string") return url;
-
-  // Match the Contentstack CDN URL pattern
-  const cdnPattern =
-    /https:\/\/images\.contentstack\.io\/v3\/assets\/[^/]+\/([^/]+)\/([^/]+)\/([^?]+)/;
-  const match = url.match(cdnPattern);
-
-  if (match) {
-    const [, assetUid, hash, filename] = match;
-    const spaceUid = config.contentstack.spaceUid || "amb10a029ae0e10001";
-    const organizationUid =
-      config.contentstack.organizationUid || "blt9a324a7f77db1ef9";
-
-    return `https://am-api.contentstack.com/spaces/${spaceUid}/assets/${assetUid}/${hash}/${filename}?locale=en-us&organization_uid=${organizationUid}`;
-  }
-
-  return url;
-};
-
-/**
  * Transform Contentstack product entry to app format
  * Expected CMS fields:
  * - title (or name): Product name
@@ -279,10 +255,7 @@ export const transformProductEntry = (entry) => {
     imageUrl = entry.thumbnail.url;
   }
 
-  // Convert to Asset Management API URL format
-  if (imageUrl) {
-    imageUrl = convertImageUrl(imageUrl);
-  }
+  // Keep original image URL from CMS (no conversion needed for display)
 
   // Handle multiple possible field names for stock
   const countInStock =
@@ -346,16 +319,26 @@ export const transformProductEntries = (entries) => {
 
 /**
  * Fetch asset details including visual markups from Asset Management API
- * @param {string} assetUid - Asset UID
+ * @param {string} bltUid - The blt asset UID from the image URL
  */
-export const getAssetDetails = async (assetUid) => {
+export const getAssetDetails = async (bltUid) => {
   try {
+    // Look up the AM UID from the mapping
+    const amUid = getAmUidFromMapping(bltUid);
+
+    if (!amUid) {
+      console.warn(`No AM mapping found for blt UID: ${bltUid}`);
+      return { success: false, error: `No AM mapping found for ${bltUid}` };
+    }
+
     const spaceUid = config.contentstack.spaceUid;
     const organizationUid = config.contentstack.organizationUid;
     const accessToken = config.contentstack.assetAccessToken;
     const workspace = config.contentstack.workspace || "main";
 
-    const url = `https://am-api.contentstack.com/api/spaces/${spaceUid}/assets/${assetUid}?locale=en-us&workspace=${workspace}`;
+    const url = `https://am-api.contentstack.com/api/spaces/${spaceUid}/assets/${amUid}?locale=en-us&workspace=${workspace}`;
+
+    console.log(`Fetching visual markups for blt:${bltUid} -> am:${amUid}`);
 
     const response = await fetch(url, {
       headers: {
@@ -379,15 +362,26 @@ export const getAssetDetails = async (assetUid) => {
 };
 
 /**
- * Extract asset UID from image URL
- * @param {string} url - Image URL
+ * Extract blt asset UID from Contentstack CDN image URL
+ * @param {string} url - Image URL (e.g., https://images.contentstack.io/v3/assets/{stack_uid}/{blt_asset_uid}/...)
  */
 export const extractAssetUid = (url) => {
   if (!url || typeof url !== "string") return null;
 
-  // Match pattern: /assets/{asset_uid}/
-  const match = url.match(/\/assets\/([a-z0-9]+)\//i);
+  // Match pattern for Contentstack CDN URL: /assets/{stack_uid}/{blt_asset_uid}/
+  // Example: https://images.contentstack.io/v3/assets/blt1234.../blt3a0427aa1530248b/...
+  const cdnPattern = /\/assets\/[^/]+\/(blt[a-z0-9]+)\//i;
+  const match = url.match(cdnPattern);
   return match ? match[1] : null;
+};
+
+/**
+ * Get the AM (Asset Management) UID from a blt UID using the mapping file
+ * @param {string} bltUid - The blt asset UID from Contentstack
+ */
+export const getAmUidFromMapping = (bltUid) => {
+  if (!bltUid || !assetMapping.mappings) return null;
+  return assetMapping.mappings[bltUid] || null;
 };
 
 export default contentstackAPI;

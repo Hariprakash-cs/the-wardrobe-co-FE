@@ -8,7 +8,7 @@ export const config = {
     environment: process.env.REACT_APP_CONTENTSTACK_ENVIRONMENT || "main",
     spaceUid: "amb10a029ae0e10001",
     organizationUid: "blt9a324a7f77db1ef9",
-    assetAccessToken: "bltfa7b223de9dce42e",
+    assetAccessToken: process.env.REACT_APP_ASSET_ACCESS_TOKEN,
     workspace: "main",
   },
 };

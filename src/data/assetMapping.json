@@ -1,0 +1,25 @@
+{
+  "description": "Mapping of Contentstack asset UIDs (blt) to Asset Management UIDs (am)",
+  "mappings": {
+    "blt61c7ff49ad99e56e": "am383a685d884aef03",
+    "blt47bee1499ab8b3a0": "am4a0b860c18b3f75c",
+    "bltd0e588f65e1e7208": "amd082b6ec1b2dbe8c",
+    "blt84511506d2e909cd": "am9690ebc32c368575",
+    "blte0183b8e609a5722": "amc33d4f85c8c2a7f8",
+    "blte8c9db97e3b9749e": "amb1c6b638ce779ea3",
+    "blt31bd4f821aefa18b": "amfa00d312e6d92dcc",
+    "bltd8888f7c776e2f32": "am9c11ee5de48ff490",
+    "blt41b677319cfe10da": "amc7d14de1eb818689",
+    "blt13ff80337e914a65": "amdf3699a8121df0b4",
+    "blt2b0dcc32909f3a33": "am821edd68bff52f3f",
+    "blt5de2e021a4615ba2": "am8ae6a04d07608f3c",
+    "blt0dee0b76a5a64ea5": "ama6b7a83754b7ea03",
+    "bltae148c1f5e3312ef": "amb533e20f0c955c06",
+    "blt72878a120ea78644": "am5f33db5a0528c5fd",
+    "blt6929ee38e8aca382": "am898ae620447b00c8",
+    "bltf1665c7a3fcd676a": "am4ff9a65ebbc6e07f",
+    "bltb6c26f5e546dd208": "am48874721905669b4",
+    "bltf07aba710894e9b4": "am3c4e16c90d90d20f",
+    "blt3a0427aa1530248b": "am553fd5c1f3b81d5f"
+  }
+}
